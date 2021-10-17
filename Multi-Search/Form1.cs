@@ -23,8 +23,7 @@ namespace Multi_Search
             string[] targets = new string[]
             {
                 $"https://www.google.de/search?q={textBox1.Text}&tbm=isch&hl=de&tbs=isz:m&sa=X&ved=0CAMQpwVqFwoTCPiXlKyCz_MCFQAAAAAdAAAAABAC&biw=1903&bih=969",
-                $"https://de-thefreedictionary-com.translate.goog/{textBox1.Text}?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=nui",
-                $"https://de.thefreedictionary.com/{textBox1.Text}",
+                $"https://www.collinsdictionary.com/dictionary/german-english/{textBox1.Text}",
                 $"https://www.dict.cc/?s={textBox1.Text}",
                 $"https://forvo.com/word/{textBox1.Text}/#de"
             };
@@ -33,7 +32,15 @@ namespace Multi_Search
             {
                 foreach (var target in targets)
                 {
-                    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", "\"" + target + "\" -inprivate");
+                    var p = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+                        Arguments = target,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true
+                    });
+                    var t = p.StandardOutput.ReadLine();
+             
                     Thread.Sleep(50);
                 }
             }
