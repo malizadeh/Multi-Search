@@ -53,6 +53,10 @@ namespace Multi_Search
             {
                 MessageBox.Show(other.Message);
             }
+
+            textBox1.Text = string.Empty;
+            textBox1.Focus();
+
         }
     }
 }
